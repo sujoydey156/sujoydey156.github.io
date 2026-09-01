@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sujoy Dey — Software Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink-950:#0A0D14;--ink-900:#0F131C;--ink-800:#151A26;--ink-700:#1C2230;--ink-600:#262E40;
+    --paper-50:#FAFAF9;--paper-100:#F2F1EE;
+    --mist-300:#A7AFC0;--mist-400:#8992A6;
+    --azure-400:#5B8DEF;--azure-500:#3E6FE0;--azure-600:#2E56C2;
+    --violet-400:#8B7FE8;
+    --green:#9ECE6A;--yellow:#F4BF4F;
+  }
+  html.light{
+    --ink-950:#FAFAF9;--ink-900:#F2F1EE;--ink-800:#E7E5E0;--ink-700:#D3D1CA;--ink-600:#D3D1CA;
+    --paper-50:#171c29;--paper-100:#1C2230;
+    --mist-300:#5B6479;--mist-400:#6E7890;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--ink-950);color:var(--paper-100);font-family:'Inter',sans-serif;transition:background .3s,color .3s}
+  h1,h2,h3,.display{font-family:'Sora',sans-serif}
+  .mono{font-family:'IBM Plex Mono',monospace}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:72rem;margin:0 auto;padding:0 1.5rem}
+  @media(min-width:1024px){.wrap{padding:0 2.5rem}}
+
+  header{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s;border-bottom:1px solid transparent}
+  header.scrolled{background:color-mix(in srgb, var(--ink-950) 85%, transparent);backdrop-filter:blur(10px);border-color:var(--ink-700)}
+  nav.bar{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem}
+  @media(min-width:1024px){nav.bar{padding:1rem 2.5rem}}
+  .logo{font-family:'Sora',sans-serif;font-weight:600;font-size:1.125rem;color:var(--paper-50)}
+  .logo span{color:var(--azure-400)}
+  .navlinks{display:none;gap:2rem;list-style:none;margin:0;padding:0}
+  @media(min-width:1024px){.navlinks{display:flex}}
+  .navlinks a{font-size:.875rem;color:var(--mist-300)}
+  .navlinks a:hover{color:var(--paper-50)}
+  .navright{display:none;align-items:center;gap:1rem}
+  @media(min-width:1024px){.navright{display:flex}}
+  .btn{border-radius:.375rem;padding:.6rem 1.25rem;font-size:.875rem;font-weight:500;display:inline-block;cursor:pointer;border:1px solid var(--ink-600);transition:.2s}
+  .btn-primary{background:var(--azure-500);color:#fff;border-color:var(--azure-500)}
+  .btn-primary:hover{background:var(--azure-600)}
+  .btn-outline{border-color:var(--azure-500);color:var(--azure-400);background:color-mix(in srgb, var(--azure-500) 10%, transparent)}
+  .btn-outline:hover{background:var(--azure-500);color:#fff}
+  .btn-ghost{border-color:var(--ink-600);color:var(--paper-100)}
+  .btn-ghost:hover{border-color:var(--azure-400);color:var(--azure-400)}
+  .icon-btn{width:2.25rem;height:2.25rem;border:1px solid var(--ink-700);border-radius:.375rem;display:grid;place-items:center;color:var(--mist-300);cursor:pointer;background:transparent}
+  .icon-btn:hover{border-color:var(--azure-400);color:var(--azure-400)}
+  .hamburger{display:grid;lg:none}
+  @media(min-width:1024px){.hamburger{display:none}}
+  .mobilebar{display:flex;align-items:center;gap:.75rem}
+  @media(min-width:1024px){.mobilebar{display:none}}
+  #mobileMenu{display:none;border-top:1px solid var(--ink-700);background:var(--ink-950);padding:1rem 1.5rem 2rem}
+  #mobileMenu.open{display:block}
+  #mobileMenu a{display:block;padding:.75rem .5rem;border-radius:.375rem;color:var(--paper-100)}
+  #mobileMenu a:hover{background:var(--ink-800)}
+
+  section{padding:6rem 0}
+  .path-label{font-family:'IBM Plex Mono',monospace;font-size:.875rem;color:var(--azure-400);margin-bottom:.75rem}
+  .section-title{font-size:2rem;font-weight:600;color:var(--paper-50);letter-spacing:-0.01em}
+  @media(min-width:640px){.section-title{font-size:2.25rem}}
+  .section-desc{margin-top:1rem;color:var(--mist-300);max-width:42rem;line-height:1.6}
+
+  .hero{position:relative;overflow:hidden;padding-top:9rem;padding-bottom:6rem}
+  @media(min-width:1024px){.hero{padding-top:11rem;padding-bottom:8rem}}
+  .hero-glow{position:absolute;left:50%;top:-10%;width:36rem;height:36rem;transform:translateX(-50%);background:color-mix(in srgb, var(--azure-500) 10%, transparent);filter:blur(120px);border-radius:50%;pointer-events:none}
+  .hero-grid{display:grid;gap:4rem;align-items:center;position:relative}
+  @media(min-width:1024px){.hero-grid{grid-template-columns:1.05fr .95fr}}
+  .hero h1{font-size:2.5rem;line-height:1.1;color:var(--paper-50);font-weight:600;margin:0}
+  @media(min-width:640px){.hero h1{font-size:3rem}}
+  @media(min-width:1024px){.hero h1{font-size:3.75rem}}
+  .hero .sub{font-size:1.25rem;color:var(--mist-300);margin-top:1rem;font-family:'Sora',sans-serif}
+  @media(min-width:640px){.hero .sub{font-size:1.5rem}}
+  .hero .desc{margin-top:1.5rem;color:var(--mist-300);max-width:42rem;line-height:1.6}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.25rem}
+  .socials{display:flex;gap:1.25rem;margin-top:2.5rem}
+  .socials a{width:2.5rem;height:2.5rem;border:1px solid var(--ink-700);border-radius:.375rem;display:grid;place-items:center;color:var(--mist-300)}
+  .socials a:hover{border-color:var(--azure-400);color:var(--azure-400)}
+
+  .codecard{border:1px solid var(--ink-700);background:color-mix(in srgb, var(--ink-900) 80%, transparent);border-radius:.75rem;box-shadow:0 25px 50px -12px rgba(0,0,0,.4);display:none}
+  @media(min-width:1024px){.codecard{display:block}}
+  .codecard .top{display:flex;gap:.4rem;align-items:center;border-bottom:1px solid var(--ink-700);padding:.75rem 1rem}
+  .dot{width:.6rem;height:.6rem;border-radius:50%}
+  .codecard .top span.file{margin-left:.75rem;font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--mist-400)}
+  .codecard pre{padding:1.5rem;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.75;color:var(--mist-300);margin:0;white-space:pre-wrap}
+  .cur{display:inline-block;width:7px;height:1rem;background:var(--azure-400);transform:translateY(2px);animation:blink 1s step-end infinite}
+  @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+
+  .about-grid{display:grid;gap:3rem}
+  @media(min-width:1024px){.about-grid{grid-template-columns:.9fr 1.1fr}}
+  .about-text p{color:var(--mist-300);line-height:1.7;margin:0 0 1.25rem}
+  .points{display:grid;gap:.75rem;list-style:none;margin:0;padding:0}
+  @media(min-width:640px){.points{grid-template-columns:1fr 1fr}}
+  .points li{display:flex;gap:.75rem;border:1px solid var(--ink-700);background:color-mix(in srgb, var(--ink-900) 60%, transparent);border-radius:.5rem;padding:1rem;font-size:.875rem}
+  .points li::before{content:'';margin-top:.4rem;width:.35rem;height:.35rem;border-radius:50%;background:var(--azure-400);flex-shrink:0}
+
+  .skills-grid{display:grid;gap:1.25rem}
+  @media(min-width:640px){.skills-grid{grid-template-columns:1fr 1fr}}
+  @media(min-width:1024px){.skills-grid{grid-template-columns:1fr 1fr 1fr}}
+  .skill-card{border:1px solid var(--ink-700);background:color-mix(in srgb, var(--ink-900) 60%, transparent);border-radius:.75rem;padding:1.5rem;transition:.2s}
+  .skill-card:hover{border-color:color-mix(in srgb, var(--azure-500) 50%, transparent)}
+  .skill-card h3{margin:.5rem 0 0;font-size:1.125rem;color:var(--paper-50)}
+  .chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+  .chip{border:1px solid var(--ink-600);background:var(--ink-800);border-radius:.375rem;padding:.3rem .6rem;font-size:.75rem}
+
+  .filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2.5rem}
+  .filter-btn{border:1px solid var(--ink-700);color:var(--mist-300);border-radius:.375rem;padding:.4rem .9rem;font-size:.875rem;cursor:pointer;background:transparent}
+  .filter-btn:hover{color:var(--paper-100);border-color:var(--ink-600)}
+  .filter-btn.active{border-color:var(--azure-500);background:color-mix(in srgb, var(--azure-500) 15%, transparent);color:var(--azure-400)}
+
+  .proj-grid{display:grid;gap:1.5rem}
+  @media(min-width:1024px){.proj-grid{grid-template-columns:1fr 1fr 1fr}}
+  .proj-card{border:1px solid var(--ink-700);background:color-mix(in srgb, var(--ink-900) 60%, transparent);border-radius:.75rem;padding:1.75rem;display:flex;flex-direction:column;transition:.2s}
+  .proj-card:hover{border-color:color-mix(in srgb, var(--azure-500) 50%, transparent)}
+  .proj-card h3{margin:0;font-size:1.25rem;color:var(--paper-50)}
+  .proj-card p.desc{font-size:.875rem;color:var(--mist-300);line-height:1.6;margin-top:.75rem}
+  .feat-list{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.4rem}
+  .feat-list li{display:flex;gap:.5rem;font-size:.875rem}
+  .feat-list li::before{content:'';margin-top:.45rem;width:4px;height:4px;border-radius:50%;background:var(--azure-400);flex-shrink:0}
+  .metrics{display:flex;gap:.75rem;margin-top:1rem}
+  .metric{border:1px solid var(--ink-600);background:var(--ink-800);border-radius:.375rem;padding:.3rem .6rem;font-family:'IBM Plex Mono',monospace;font-size:.75rem}
+  .metric .val{color:var(--azure-400)}
+  .tech-list{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.25rem}
+  .tech-chip{border:1px solid var(--ink-600);border-radius:.375rem;padding:.3rem .6rem;font-size:.75rem;color:var(--mist-300)}
+  .card-actions{display:flex;gap:.75rem;margin-top:1.5rem;padding-top:.5rem}
+  .card-actions a{flex:1;text-align:center;border-radius:.375rem;padding:.5rem 1rem;font-size:.875rem;font-weight:500}
+
+  .certs-grid{display:grid;gap:1.25rem}
+  @media(min-width:640px){.certs-grid{grid-template-columns:1fr 1fr}}
+  .cert-card{border:1px solid var(--ink-700);background:color-mix(in srgb, var(--ink-900) 60%, transparent);border-radius:.75rem;padding:1.5rem;display:flex;gap:1rem}
+  .cert-icon{width:2.75rem;height:2.75rem;border:1px solid color-mix(in srgb, var(--azure-500) 40%, transparent);background:color-mix(in srgb, var(--azure-500) 10%, transparent);border-radius:.5rem;display:grid;place-items:center;color:var(--azure-400);flex-shrink:0}
+  .cert-card h3{margin:0;font-size:1rem;color:var(--paper-50)}
+  .cert-card p{margin:.25rem 0 0;font-size:.875rem;color:var(--mist-300)}
+
+  .stats-section{border-top:1px solid var(--ink-700);border-bottom:1px solid var(--ink-700);background:color-mix(in srgb, var(--ink-900) 40%, transparent);padding:4rem 0}
+  .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;text-align:center}
+  @media(min-width:640px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
+  .stat-val{font-family:'Sora',sans-serif;font-size:1.875rem;font-weight:600;color:var(--azure-400)}
+  @media(min-width:640px){.stat-val{font-size:2.25rem}}
+  .stat-label{margin-top:.4rem;font-size:.8rem;color:var(--mist-300)}
+
+  .timeline{position:relative;display:grid;gap:2.5rem;border-left:1px solid var(--ink-700);padding-left:2rem}
+  .timeline .item{position:relative}
+  .timeline .dot2{position:absolute;left:-2.28rem;top:.35rem;width:.65rem;height:.65rem;border-radius:50%;border:2px solid var(--azure-400);background:var(--ink-950)}
+  .timeline h3{margin:.35rem 0 0;font-size:1.125rem;color:var(--paper-50)}
+  .timeline .inst{margin-top:.25rem;font-size:.875rem;color:var(--mist-300)}
+  .timeline .score{margin-top:.25rem;font-size:.875rem;color:var(--azure-400)}
+
+  .career-grid{display:grid;gap:1.25rem}
+  @media(min-width:640px){.career-grid{grid-template-columns:1fr 1fr}}
+  .career-card{border:1px solid var(--ink-700);background:color-mix(in srgb, var(--ink-900) 60%, transparent);border-radius:.75rem;padding:1.5rem}
+  .career-card h3{margin:0;font-size:1rem;color:var(--paper-50)}
+  .career-card p{margin-top:.5rem;font-size:.875rem;color:var(--mist-300);line-height:1.6}
+
+  .contact-grid{display:grid;gap:2.5rem}
+  @media(min-width:1024px){.contact-grid{grid-template-columns:.8fr 1.2fr}}
+  .contact-links{display:grid;gap:1rem}
+  .contact-links a{display:flex;align-items:center;gap:.75rem;border:1px solid var(--ink-700);background:color-mix(in srgb, var(--ink-900) 60%, transparent);border-radius:.5rem;padding:1rem;font-size:.875rem}
+  .contact-links a:hover{border-color:var(--azure-400)}
+  form{display:grid;gap:1rem}
+  .form-row{display:grid;gap:1rem}
+  @media(min-width:640px){.form-row{grid-template-columns:1fr 1fr}}
+  label{display:block;margin-bottom:.4rem;font-size:.875rem;color:var(--mist-300)}
+  input,textarea{width:100%;border:1px solid var(--ink-700);background:color-mix(in srgb, var(--ink-900) 60%, transparent);border-radius:.375rem;padding:.65rem .9rem;font-size:.875rem;color:var(--paper-50);font-family:inherit;outline:none}
+  input:focus,textarea:focus{border-color:var(--azure-400)}
+  textarea{resize:none}
+  .form-msg{font-size:.875rem;color:var(--azure-400);display:none}
+
+  footer{border-top:1px solid var(--ink-700);padding:2.5rem 0}
+  .footer-inner{display:flex;flex-direction:column;align-items:center;gap:1.25rem;text-align:center}
+  @media(min-width:1024px){.footer-inner{flex-direction:row;justify-content:space-between;text-align:left}}
+  .footer-inner p{font-size:.875rem;color:var(--mist-400);margin:0}
+  .footer-icons{display:flex;gap:1rem}
+  .footer-icons a{color:var(--mist-400)}
+  .footer-icons a:hover{color:var(--azure-400)}
+
+  #backToTop{position:fixed;bottom:1.5rem;right:1.5rem;z-index:40;width:2.75rem;height:2.75rem;border-radius:50%;border:1px solid var(--ink-700);background:color-mix(in srgb, var(--ink-900) 90%, transparent);color:var(--azure-400);display:none;place-items:center;cursor:pointer;backdrop-filter:blur(6px);box-shadow:0 10px 20px rgba(0,0,0,.3)}
+  #backToTop.show{display:grid}
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <nav class="bar">
+    <a href="#home" class="logo">Sujoy<span>.</span></a>
+    <ul class="navlinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="navright">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"></button>
+      <a href="https://drive.google.com/file/d/1fLFBS-yxs7IFa-SGOuWRIkObdCoSGcdU/view" class="btn btn-outline">Download Resume</a>
+    </div>
+    <div class="mobilebar">
+      <button class="icon-btn" id="themeToggleMobile" aria-label="Toggle theme"></button>
+      <button class="icon-btn hamburger" id="hamburgerBtn" aria-label="Toggle menu">☰</button>
+    </div>
+  </nav>
+  <div id="mobileMenu">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+    <a href="#" class="btn btn-outline" style="display:block;text-align:center;margin-top:.75rem">Download Resume</a>
+  </div>
+</header>
+
+<main>
+  <section id="home" class="hero">
+    <div class="hero-glow"></div>
+    <div class="wrap hero-grid">
+      <div>
+        <p class="path-label">~/home</p>
+        <h1>Hi, I'm Sujoy Dey</h1>
+        <p class="sub">Software Developer · Java · SQL · SAP ABAP Cloud</p>
+        <p class="desc">Final-year Computer Science and Engineering student passionate about software development, problem solving, databases, and building practical applications.</p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="https://drive.google.com/file/d/1fLFBS-yxs7IFa-SGOuWRIkObdCoSGcdU/view" class="btn btn-ghost">Download Resume</a>
+          <a href="#contact" class="btn" style="border-color:transparent;color:var(--mist-300)">Contact Me</a>
+        </div>
+        <div class="socials">
+          <a href="https://www.github.com/sujoydey156" aria-label="GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-1.94c-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.03 1.78 2.72 1.26 3.38.97.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.58.24 2.75.12 3.04.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.08.78 2.17v3.21c0 .3.2.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+          <a href="https://www.linkedin.com/in/sujoydey156" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.86 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.37 4.26 5.44v6.3ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg></a>
+          <a href="mailto:2005sujoydey@gmail.com" aria-label="Email"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="4.5" width="19" height="15" rx="2.2"/><path d="m3.5 6 8.5 6.5L20.5 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+      <div class="codecard">
+        <div class="top">
+          <span class="dot" style="background:#EF6A5F"></span>
+          <span class="dot" style="background:#F4BF4F"></span>
+          <span class="dot" style="background:#61C454"></span>
+          <span class="file">profile.ts</span>
+        </div>
+        <pre><span style="color:var(--violet-400)">const</span> <span style="color:var(--azure-400)">developer</span> = {
+  <span style="color:var(--paper-100)">name:</span> <span style="color:var(--green)">"Sujoy Dey"</span>,
+  <span style="color:var(--paper-100)">role:</span> <span style="color:var(--green)">"Software Developer"</span>,
+  <span style="color:var(--paper-100)">focus:</span> [<span style="color:var(--green)">"Java"</span>, <span style="color:var(--green)">"SQL"</span>, <span style="color:var(--green)">"SAP ABAP Cloud"</span>],
+  <span style="color:var(--paper-100)">cgpa:</span> <span style="color:var(--yellow)">9.05</span>,
+  <span style="color:var(--paper-100)">graduating:</span> <span style="color:var(--yellow)">2027</span>,
+  <span style="color:var(--paper-100)">openTo:</span> <span style="color:var(--green)">"internships & fresher roles"</span>
+}<span class="cur"></span></pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <p class="path-label">~/about</p>
+      <h2 class="section-title">About</h2>
+      <div class="about-grid reveal" style="margin-top:3rem">
+        <div class="about-text">
+          <p>I'm a final-year Computer Science and Engineering student at <strong style="color:var(--paper-50)">Narula Institute of Technology</strong>, currently maintaining a CGPA of 9.05. My work centers on backend development — writing clean Java, designing relational schemas in Oracle, and reasoning through problems with data structures and algorithms.</p>
+          <p>Beyond core CS, I've spent time learning SAP ABAP Cloud, where I'm SAP Certified as a Back End Developer, and I enjoy applying what I learn in the classroom to real, working software rather than isolated exercises.</p>
+        </div>
+        <ul class="points">
+          <li>Final-year CSE student with a strong foundation in Java and C</li>
+          <li>Hands-on experience with SQL and Oracle databases</li>
+          <li>Consistent practice in Data Structures, Algorithms and problem solving</li>
+          <li>SAP Certified Back End Developer — ABAP Cloud</li>
+          <li>Built academic and practical software projects end to end</li>
+          <li>Interested in backend and software development roles</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <p class="path-label">~/skills</p>
+      <h2 class="section-title">Skills</h2>
+      <p class="section-desc">Technologies and concepts I work with regularly, organized by area.</p>
+      <div class="skills-grid reveal" style="margin-top:3rem" id="skillsGrid"></div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <p class="path-label">~/projects</p>
+      <h2 class="section-title">Projects</h2>
+      <p class="section-desc">A selection of academic and self-directed projects covering backend development, databases, and applied machine learning.</p>
+      <div class="filters" id="filters" style="margin-top:2.5rem"></div>
+      <div class="proj-grid reveal" id="projGrid"></div>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <div class="wrap">
+      <p class="path-label">~/certifications</p>
+      <h2 class="section-title">Certifications</h2>
+      <div class="certs-grid reveal" style="margin-top:3rem" id="certsGrid"></div>
+    </div>
+  </section>
+
+  <section class="stats-section" style="padding-top:4rem;padding-bottom:4rem">
+    <div class="wrap stats-grid reveal">
+      <div><div class="stat-val">9.05</div><div class="stat-label">CGPA</div></div>
+      <div><div class="stat-val">5★</div><div class="stat-label">HackerRank — Java</div></div>
+      <div><div class="stat-val">5★</div><div class="stat-label">HackerRank — C</div></div>
+      <div><div class="stat-val">150+</div><div class="stat-label">GeeksforGeeks Solved</div></div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="wrap">
+      <p class="path-label">~/education</p>
+      <h2 class="section-title">Education</h2>
+      <div class="timeline reveal" style="margin-top:3rem" id="eduTimeline"></div>
+    </div>
+  </section>
+
+  <section id="career">
+    <div class="wrap">
+      <p class="path-label">~/career-and-learning</p>
+      <h2 class="section-title">Career &amp; Learning</h2>
+      <p class="section-desc">I haven't started a formal internship yet — this is where that entry will go once it happens. For now, here's where my time and effort have gone.</p>
+      <div class="career-grid reveal" style="margin-top:3rem" id="careerGrid"></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <p class="path-label">~/contact</p>
+      <h2 class="section-title">Let's Connect</h2>
+      <p class="section-desc">I'm currently open to software development opportunities, internships, and technical collaborations.</p>
+      <div class="contact-grid reveal" style="margin-top:3rem">
+        <div class="contact-links">
+          <a href="mailto:2005sujoydey@gmail.com"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--azure-400)" stroke-width="1.6" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.2"/><path d="m3.5 6 8.5 6.5L20.5 6" stroke-linecap="round" stroke-linejoin="round"/></svg>2005sujoydey@gmail.com</a>
+          <a href="https://www.linkedin.com/in/sujoydey156"><svg width="18" height="18" viewBox="0 0 24 24" fill="var(--azure-400)"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.86 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.37 4.26 5.44v6.3ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg>LinkedIn</a>
+          <a href="https://www.github.com/sujoydey156"><svg width="18" height="18" viewBox="0 0 24 24" fill="var(--azure-400)"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-1.94c-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.03 1.78 2.72 1.26 3.38.97.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.58.24 2.75.12 3.04.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.08.78 2.17v3.21c0 .3.2.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>GitHub</a>
+        </div>
+        <form id="contactForm">
+          <div class="form-row">
+            <div><label for="name">Name</label><input id="name" required /></div>
+            <div><label for="email">Email</label><input id="email" type="email" required /></div>
+          </div>
+          <div><label for="message">Message</label><textarea id="message" rows="5" required></textarea></div>
+          <div>
+            <button type="submit" class="btn btn-primary" style="border:none;cursor:pointer">Send Message</button>
+          </div>
+          <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <p>© 2026 Sujoy Dey. Built with passion for software development.</p>
+    <div class="footer-icons">
+      <a href="https://github.com/sujoydey156" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-1.94c-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.03 1.78 2.72 1.26 3.38.97.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.58.24 2.75.12 3.04.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.08.78 2.17v3.21c0 .3.2.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+      <a href="https://www.linkedin.com/in/sujoydey156" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.86 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.37 4.26 5.44v6.3ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg></a>
+      <a href="mailto:2005sujoydey@gmail.com" aria-label="Email"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="4.5" width="19" height="15" rx="2.2"/><path d="m3.5 6 8.5 6.5L20.5 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<button id="backToTop" aria-label="Back to top"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+
+<script>
+  // ---- Data ----
+  const skillCategories = [
+    {label:'Programming',path:'~/skills/languages',items:['Java','C','C++','Python']},
+    {label:'Web',path:'~/skills/web',items:['HTML','CSS','JavaScript']},
+    {label:'Database',path:'~/skills/database',items:['SQL','Oracle','PL/SQL','SQLite']},
+    {label:'SAP',path:'~/skills/sap',items:['SAP ABAP','ABAP Cloud','CDS','OData','RAP']},
+    {label:'Core Computer Science',path:'~/skills/core-cs',items:['Data Structures & Algorithms','DBMS','Operating Systems','Object-Oriented Programming','Computer Networks','Software Engineering']},
+    {label:'Tools',path:'~/skills/tools',items:['Git','GitHub','VS Code','IntelliJ IDEA','Eclipse','Google Colab']},
+  ];
+
+  const projects = [
+    {id:'trocr',title:'Doctor Handwritten Prescription Recognition using TrOCR',
+     desc:'An OCR-based deep learning system that converts handwritten medical prescriptions into readable digital text and maps recognized medicine names to generic medicine names.',
+     tech:['Python','TrOCR','Transformers','OpenCV','NLP','OCR','NumPy','Pandas','Google Colab'],
+     features:['Fine-tuned TrOCR model for handwritten prescription recognition','Fuzzy string matching for OCR error correction','Medicine-to-generic-name mapping'],
+     metrics:[{label:'CER',value:'5.12%'},{label:'WER',value:'7.09%'}],
+     github:'https://github.com/sujoydey156/doctor-handwritten-prescription-recognition'},
+    {id:'banking',title:'Banking Management System',
+     desc:'A console-based banking application developed using Java and Oracle Database with JDBC integration for managing customers, accounts, balances and banking transactions.',
+     tech:['Java','JDBC','Oracle SQL'],
+     features:['Customer and account management','Deposit, withdrawal and balance management','PIN-based authentication','Oracle database integration via JDBC'],
+     github:'https://github.com/sujoydey156/Banking-Management-System',},
+    {id:'age-calculator',title:'Age Calculator in C',
+     desc:'A C program that calculates a person\'s age in years, months, and days based on their date of birth using the current system date.',
+     tech:['C','Standard C Library','stdio.h','time.h'],
+     features:['Date of birth input','Automatic current-date detection','Age calculation in years, months and days','Leap-year and date validation handling'],
+     github:'https://github.com/sujoydey156/Age-Calculator-C'},
+  ];
+
+  const certifications = [
+    {title:'SAP Certified Back End Developer - ABAP Cloud'},
+    {title:'Learning Basic ABAP Programming', provider:'SAP Learning'},
+    {title:'HackerRank 5-Star in Java and C'},
+    {title:'150+ Problems Solved on GeeksforGeeks'},
+  ];
+
+  const education = [
+    {degree:'B.Tech in Computer Science and Engineering', inst:'Narula Institute of Technology', period:'2023 — 2027', score:'CGPA: 9.05'},
+    {degree:'Higher Secondary', inst:'Tarahat Saradamoni High School · WBCHSE', period:'', score:'87.17%'},
+    {degree:'Secondary', inst:'Singrapur High School · WBBSE', period:'', score:'91.57%'},
+  ];
+
+  const careerItems = [
+    {title:'Software Development Projects', detail:'Designed and built academic projects spanning backend systems, database-driven applications, and applied machine learning.'},
+    {title:'DSA & Problem Solving', detail:'Regular practice on data structures and algorithms, with 150+ problems solved on GeeksforGeeks and a 5-star HackerRank rating in Java and C.'},
+    {title:'Java & Oracle / JDBC Development', detail:'Built a console-based banking system in Java with JDBC connectivity to an Oracle database, covering authentication, transactions, and account management.'},
+    {title:'SAP ABAP Cloud Learning', detail:'Completed SAP Certified Back End Developer — ABAP Cloud, covering ABAP, CDS views, OData services, and the RESTful ABAP Programming Model (RAP).'},
+  ];
+
+  // ---- Render skills ----
+  const skillsGrid = document.getElementById('skillsGrid');
+  skillsGrid.innerHTML = skillCategories.map(c => `
+    <div class="skill-card">
+      <p class="mono" style="font-size:.75rem;color:var(--mist-400)">${c.path}</p>
+      <h3>${c.label}</h3>
+      <div class="chips">${c.items.map(i=>`<span class="chip">${i}</span>`).join('')}</div>
+    </div>`).join('');
+
+  // ---- Render projects & filters ----
+  const allTech = ['All', ...Array.from(new Set(projects.flatMap(p=>p.tech))).sort()];
+  const filtersEl = document.getElementById('filters');
+  const projGrid = document.getElementById('projGrid');
+  let currentFilter = 'All';
+
+  function renderProjects(){
+    const list = currentFilter==='All' ? projects : projects.filter(p=>p.tech.includes(currentFilter));
+    projGrid.innerHTML = list.map(p => `
+      <article class="proj-card">
+        <h3>${p.title}</h3>
+        <p class="desc">${p.desc}</p>
+        <ul class="feat-list">${p.features.map(f=>`<li>${f}</li>`).join('')}</ul>
+        ${p.metrics ? `<div class="metrics">${p.metrics.map(m=>`<span class="metric">${m.label} <span class="val">${m.value}</span></span>`).join('')}</div>` : ''}
+        <div class="tech-list">${p.tech.map(t=>`<span class="tech-chip">${t}</span>`).join('')}</div>
+        <div class="card-actions">
+          ${p.github ? `<a href="${p.github}" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="border:1px solid var(--ink-600)">GitHub</a>` : ''}
+        </div>
+      </article>`).join('');
+  }
+
+  filtersEl.innerHTML = allTech.map(t => `<button class="filter-btn ${t==='All'?'active':''}" data-tech="${t}">${t}</button>`).join('');
+  filtersEl.addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if(!btn) return;
+    currentFilter = btn.dataset.tech;
+    [...filtersEl.children].forEach(b => b.classList.toggle('active', b===btn));
+    renderProjects();
+  });
+  renderProjects();
+
+  // ---- Render certifications ----
+  const certsGrid = document.getElementById('certsGrid');
+  certsGrid.innerHTML = certifications.map(c => `
+    <div class="cert-card">
+      <div class="cert-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2.5 14.5 8l6 .9-4.3 4.2 1 6-5.2-2.8L7 19.1l1-6L3.5 8.9l6-.9L12 2.5Z" stroke-linejoin="round"/></svg></div>
+      <div><h3>${c.title}</h3>${c.provider ? `<p>${c.provider}</p>`:''}</div>
+    </div>`).join('');
+
+  // ---- Render education ----
+  const eduTimeline = document.getElementById('eduTimeline');
+  eduTimeline.innerHTML = education.map(e => `
+    <div class="item">
+      <span class="dot2"></span>
+      <p class="mono" style="font-size:.75rem;color:var(--mist-400)">${e.period}</p>
+      <h3>${e.degree}</h3>
+      <p class="inst">${e.inst}</p>
+      <p class="score">${e.score}</p>
+    </div>`).join('');
+
+  // ---- Render career ----
+  document.getElementById('careerGrid').innerHTML = careerItems.map(i => `
+    <div class="career-card"><h3>${i.title}</h3><p>${i.detail}</p></div>`).join('');
+
+  // ---- Header scroll state ----
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 8);
+    document.getElementById('backToTop').classList.toggle('show', window.scrollY > 640);
+  }, {passive:true});
+
+  // ---- Mobile menu ----
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburgerBtn.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+  // ---- Theme toggle ----
+  const sunIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2M12 19.5v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2.5 12h2M19.5 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" stroke-linecap="round"/></svg>`;
+  const moonIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  function setThemeIcons(){
+    const isLight = document.documentElement.classList.contains('light');
+    const icon = isLight ? sunIcon : moonIcon;
+    document.getElementById('themeToggle').innerHTML = icon;
+    document.getElementById('themeToggleMobile').innerHTML = icon;
+  }
+  function toggleTheme(){
+    document.documentElement.classList.toggle('light');
+    setThemeIcons();
+  }
+  document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+  document.getElementById('themeToggleMobile').addEventListener('click', toggleTheme);
+  setThemeIcons();
+
+  // ---- Back to top ----
+  document.getElementById('backToTop').addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+  // ---- Contact form ----
+  document.getElementById('contactForm').addEventListener('submit', e => {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const formMsg = document.getElementById('formMsg');
+
+    if (!name || !email || !message) return;
+
+    const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+    );
+
+    formMsg.textContent = 'Opening your email app...';
+    formMsg.style.display = 'block';
+    window.location.href = `mailto:2005sujoydey@gmail.com?subject=${subject}&body=${body}`;
+  });
+
+  // ---- Scroll reveal ----
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.12});
+  revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
